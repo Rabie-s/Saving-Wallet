@@ -12,6 +12,16 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+
+        //disable csrf for postman tests
+       /* $middleware->validateCsrfTokens(except:[
+           'registerUser',
+           'loginUser',
+           'user/createNewTransaction'
+        ]); */
+        $middleware->redirectGuestsTo(fn() => route('user.auth.showLoginForm'));
+        $middleware->redirectUsersTo(fn()=>route('home'));
+        
         $middleware->web(append: [
             HandleInertiaRequests::class,
         ]);
