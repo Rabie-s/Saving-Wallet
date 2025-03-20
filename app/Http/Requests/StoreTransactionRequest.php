@@ -24,6 +24,7 @@ class StoreTransactionRequest extends FormRequest
         return [
             'amount'=>'required|integer|min:0',
             'type'=>'required|in:income,expenses',
+            'note'=>'nullable',
             'category_id'=>'required'
         ];
     }

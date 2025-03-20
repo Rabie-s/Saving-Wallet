@@ -3,12 +3,22 @@
 namespace App\Http\Controllers\User;
 
 
+use Inertia\Inertia;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreTransactionRequest;
 
 class TransactionController extends Controller
 {
+
+    public function index()
+    {
+        $authenticatedUser = Auth::user();
+        $userTransactions = $authenticatedUser->transactions()
+            ->select('id', 'type', 'amount', 'created_at')->latest()->paginate(8);
+        return Inertia::render('User/Transaction/Index', ['userTransactions' => $userTransactions]);
+    }
+
     public function createNewTransaction(StoreTransactionRequest $request)
     {
         $authenticatedUser = Auth::user();

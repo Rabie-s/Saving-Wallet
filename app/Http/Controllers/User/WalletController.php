@@ -18,7 +18,7 @@ class WalletController extends Controller
         $walletBalance = $wallet->balance;
 
         $userTransactions = $authenticatedUser->transactions()
-            ->select('id', 'type', 'amount', 'created_at')->latest()->paginate(5);
+            ->select('id', 'type', 'amount', 'created_at')->latest()->limit(5)->get();
 
 
         $totalIncome = $authenticatedUser->transactions()->where('type', 'income')->sum('amount');

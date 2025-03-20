@@ -30,6 +30,12 @@
                 </div>
 
                 <div class="mb-2">
+                    <Input label="Birthdate" type="date" v-model="formData.birthdate" />
+                    <p v-if="errors.birthdate" class="mt-1 text-sm text-red-600 dark:text-red-500">{{
+                        errors.birthdate }}</p>
+                </div>
+
+                <div class="mb-2">
                     <label for="block mb-2 text-sm font-medium text-gray-900">Upload your image</label>
                     <input type="file" @input="formData.avatar = $event.target.files[0]"  class="outline outline-none rounded w-full p-1 file:bg-blue-600 hover:file:bg-blue-500 file:p-2 file:rounded-lg file:text-white file:outline-none file:border-0 file:cursor-pointer">
                 </div>
@@ -69,6 +75,7 @@ const formData = useForm({
     email: '',
     password: '',
     phone_number: '',
+    birthdate:'',
     avatar:null
 
 })
