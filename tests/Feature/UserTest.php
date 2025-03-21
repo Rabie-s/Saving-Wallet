@@ -28,37 +28,50 @@ class UserTest extends TestCase
     public function test_user_can_register()
     {
 
-        $user = User::factory()->create()->toArray();
+        $user = User::create([
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+            'phone_number' => '1234567890',
+            'password' => bcrypt('rabiePassword'),
+            'role' => 'user',
+        ]);
+        $user->wallet()->create();
 
-        $response = $this->post(route('user.auth.registerUser'), $user);
+        $response = $this->post(route('user.auth.registerUser'), $user->toArray());
 
-        $this->assertDatabaseHas('users', ['email' => $user['email']]);
+        $this->assertDatabaseHas('users', ['email' => $user->email]);
+        $this->assertDatabaseHas('wallets', ['user_id' =>$user->id]);
     }
 
     public function test_user_can_login()
     {
-        $user = User::factory()->create([
-            'password' => bcrypt('rabiePassword'), 
+        $user = User::create([
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+            'phone_number' => '1234567890',
+            'password' => bcrypt('rabiePassword'),
+            'role' => 'user',
         ]);
 
         $response = $this->post(route('user.auth.loginUser'), [
             'email' => $user->email,
-            'password' => 'rabiePassword', 
+            'password' => 'rabiePassword',
         ]);
 
-        $this->assertAuthenticatedAs($user); 
+        $this->assertAuthenticatedAs($user);
     }
 
-    public function test_user_can_logout(){
-            
-    $user = User::factory()->create();
+    public function test_user_can_logout()
+    {
 
-    $this->actingAs($user); 
+        $user = User::factory()->create();
 
-    $response = $this->post(route('user.auth.logoutUser'));
-    
-    $response->assertRedirect('/');
-    
-    $this->assertGuest();
+        $this->actingAs($user);
+
+        $response = $this->post(route('user.auth.logoutUser'));
+
+        $response->assertRedirect('/');
+
+        $this->assertGuest();
     }
 }

@@ -9,6 +9,7 @@ require __DIR__ . '/wep/homeWep.php';
 Route::prefix('user')->group(function () {
     Route::middleware('auth')->group(function () {
         require __DIR__ . '/wep/walletWep.php';
+        require __DIR__ . '/wep/profileWep.php';
         require __DIR__ . '/wep/categoryWep.php';
         require __DIR__ . '/wep/transactionWep.php';
     });

@@ -41,7 +41,7 @@
 
 <script setup>
 defineProps({ errors: Object })
-import {  useForm } from '@inertiajs/vue3'
+import { useForm } from '@inertiajs/vue3'
 import Input from '@/Components/Form/Input.vue'
 
 

@@ -4,7 +4,10 @@
         :message="$page.props.flash.message.message" />
 
     <NavBar />
-    <slot />
+    <div class="container mx-auto">
+        <slot />
+    </div>
+    
 </template>
 
 <script setup>

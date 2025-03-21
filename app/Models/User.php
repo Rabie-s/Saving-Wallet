@@ -30,6 +30,13 @@ class User extends Authenticatable
         'role',
     ];
 
+    protected $appends = ['avatar_image_url']; 
+
+    public function getAvatarImageUrlAttribute() 
+    {
+        return asset('storage/images/' . $this->avatar);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -51,6 +58,14 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function getTotalIncomeAttribute() {
+        return $this->transactions->where('type', 'income')->sum('amount');
+    }
+    
+    public function getTotalExpensesAttribute() {
+        return $this->transactions->where('type', 'expenses')->sum('amount');
     }
 
     public function wallet(): HasOne

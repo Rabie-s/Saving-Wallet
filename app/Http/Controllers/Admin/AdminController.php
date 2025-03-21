@@ -14,16 +14,8 @@ class AdminController extends Controller
         ->select('id','name','created_at')->paginate(8);
 
         $users->each(function ($user) {
-            // Calculate total income and expenses
-            $user->total_income = $user->transactions
-                ->where('type', 'income')
-                ->sum('amount');
-        
-            $user->total_expenses = $user->transactions
-                ->where('type', 'expenses')
-                ->sum('amount');
+            $user->append(['total_income', 'total_expenses']);
         });
-
         
         return Inertia::render('Admin/Index',['users'=>$users]);
     }

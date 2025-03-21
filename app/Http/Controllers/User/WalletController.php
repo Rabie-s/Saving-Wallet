@@ -4,22 +4,19 @@ namespace App\Http\Controllers\User;
 
 use Inertia\Inertia;
 use App\Models\Category;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 
 class WalletController extends Controller
 {
     public function index()
     {
-        $authenticatedUser = Auth::user();
+        $authenticatedUser = auth()->user();
 
         $wallet = $authenticatedUser->wallet()->first();
         $walletBalance = $wallet->balance;
 
         $userTransactions = $authenticatedUser->transactions()
             ->select('id', 'type', 'amount', 'created_at')->latest()->limit(5)->get();
-
 
         $totalIncome = $authenticatedUser->transactions()->where('type', 'income')->sum('amount');
         $totalExpenses = $authenticatedUser->transactions()->where('type', 'expenses')->sum('amount');

@@ -1,5 +1,5 @@
 <template>
-    <div class="container mx-auto">
+    
 
         <div class="flex gap-x-1 justify-end my-2">
             <Button @click="open = true" color="primary">Create new category</Button>
@@ -30,7 +30,7 @@
                 </tbody>
             </table>
         </div>
-    </div>
+  
 
     <Modal @close="(n) => open = n" v-if="open">
         <div ref="modal" class="flex flex-col gap-y-3">
