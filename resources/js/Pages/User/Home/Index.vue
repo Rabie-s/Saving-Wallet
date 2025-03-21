@@ -7,7 +7,9 @@
         <div class="container mx-auto px-6 text-center">
           <h1 class="text-5xl text-black font-bold mb-4">Take Control of Your Finances</h1>
           <p class="text-xl mb-8 text-black">Manage your income, expenses, and savings all in one place. Start saving smarter today!</p>
-          <a href="#" class=" text-white bg-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-blue-500">Get Started for Free</a>
+
+          <Link :href="route('user.auth.showLoginForm')" class=" text-white bg-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-blue-500">Get Started for Free</Link>
+        
         </div>
       </section>
   
@@ -115,12 +117,9 @@
     </div>
   </template>
   
-  <script>
-  export default {
-    name: 'LandingPage',
-  };
+  <script setup>
+
+import { Link } from '@inertiajs/vue3';
+ 
   </script>
   
-  <style scoped>
-  /* Add custom styles here if needed */
-  </style>

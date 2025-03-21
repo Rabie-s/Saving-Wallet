@@ -7,7 +7,9 @@
             </Link>
         </div>
 
-        <h1 class="text-2xl text-center uppercase font-bold my-2">Last 5 transaction</h1>
+        <div class="m-5 p-5 bg-gray-100 shadow-lg rounded-md">
+            <h1 class="text-3xl font-extrabold uppercase text-center">My transactions</h1>
+        </div>
 
         <div class="overflow-x-auto bg-white shadow-lg rounded-lg">
             <table class="w-full border-collapse">
@@ -35,7 +37,12 @@
             class="d-flex justify-content-center mt-4">
             <Pagination :links="userTransactions.links" />
         </div>
+
+
+ 
+
     </div>
+
 
 
 
@@ -44,5 +51,9 @@
 <script setup>
 defineProps({ userTransactions: Object })
 import Button from '@/Components/Form/Button.vue'
+import Pagination from '@/Components/Pagination.vue'
 import { Link } from '@inertiajs/vue3';
+
+
+
 </script>

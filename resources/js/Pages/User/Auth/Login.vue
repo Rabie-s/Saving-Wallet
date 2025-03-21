@@ -24,7 +24,12 @@
                     <button type="submit"
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login</button>
 
-
+                    <div>
+                        <span class="text-gray-500 text-sm dark:text-gray-400">You don't have an account. Please </span>
+                        <Link class="text-blue-600 hover:text-blue-500 text-sm"
+                            :href="route('user.auth.showRegistrationForm')">Register
+                        </Link>
+                    </div>
                 </div>
 
             </form>
@@ -41,7 +46,7 @@
 
 <script setup>
 defineProps({ errors: Object })
-import { useForm } from '@inertiajs/vue3'
+import { useForm, Link } from '@inertiajs/vue3'
 import Input from '@/Components/Form/Input.vue'
 
 

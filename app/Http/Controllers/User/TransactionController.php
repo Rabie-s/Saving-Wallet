@@ -27,7 +27,7 @@ class TransactionController extends Controller
 
         //check user cannot add an expense transaction greater than the remaining balance in their wallet
         if ($type === 'expenses' && $wallet->balance < $amount) {
-            return redirect()->route('user.wallet')
+            return redirect()->back()
                 ->with('message', ['message' => 'You don’t have enough money ', 'type' => 'error']);
                 abort(403);
         }
@@ -38,7 +38,7 @@ class TransactionController extends Controller
            $wallet->decrement('balance',$amount);
         }
         $authenticatedUser->transactions()->create($request->validated());
-        $wallet->save();
+        $wallet->save();//create new transaction
         return redirect()->route('user.wallet')
             ->with('message', ['message' => 'Transaction make successfully', 'type' => 'success']);
     }

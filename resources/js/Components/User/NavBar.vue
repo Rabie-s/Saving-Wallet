@@ -36,7 +36,7 @@
           </Link>
 
           <Link :href="route('user.auth.showRegistrationForm')">
-          <Button color="primary">Sign Up</Button>
+          <Button class=" outline outline-1 outline-white" color="primary">Sign Up</Button>
           </Link>
         </template>
 

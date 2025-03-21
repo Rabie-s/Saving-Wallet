@@ -3,7 +3,9 @@
     <div class="container mx-auto">
         <div class="flex gap-x-1 justify-end my-2">
             <Button @click="open = true" color="primary">Create new category</Button>
-
+            <Link :href="route('user.wallet')">
+            <Button color="primary">Get back</Button>
+            </Link>
         </div>
 
         <div class="overflow-x-auto bg-white shadow-lg rounded-lg">

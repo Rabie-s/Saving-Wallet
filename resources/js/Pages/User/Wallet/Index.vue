@@ -60,10 +60,14 @@
 
             </div>
 
+            <div class="col-span-1">
+                <div class="w-full">
+                    <h1 class="text-center">Income VS Expenses</h1>
+                    <BarChart :income="props.totalIncome" :expenses="props.totalExpenses"  />
+                </div>
+            </div>
+
         </div>
-
-
-
 
 
         <Modal @close="(n) => open = n" v-if="open">
@@ -115,12 +119,15 @@ const props = defineProps({ walletBalance: Number, categories: Array, totalIncom
 import Button from '@/Components/Form/Button.vue'
 import Input from '@/Components/Form/Input.vue'
 import Modal from '@/Components/Form/Modal.vue';
+import BarChart from '@/Components/BarChart.vue';
 import { ref, computed } from 'vue';
 import { useForm, Link } from '@inertiajs/vue3';
 import { onClickOutside } from '@vueuse/core';
 const open = ref(false)
 const modal = ref(null)
 onClickOutside(modal, () => (open.value = false))
+
+
 
 const categories = props.categories;
 const formData = useForm({
@@ -131,9 +138,7 @@ const formData = useForm({
 })
 
 const filteredCategories = computed(() => {
-
     return categories.filter(category => category.type === formData.type);
-
 
 });
 
@@ -143,9 +148,6 @@ function createNewTransaction() {
             formData.reset()
             open.value = false
         },
-        onError: () => {
-            open.value = false
-        }
     })
 }
 
