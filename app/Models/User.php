@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use DateTimeInterface;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -34,7 +35,7 @@ class User extends Authenticatable
 
     public function getAvatarImageUrlAttribute() 
     {
-        return asset('storage/images/' . $this->avatar);
+        return asset('storage/avatars/' . $this->avatar);
     }
 
     /**
@@ -82,4 +83,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Category::class);
     }
+
+        //format date
+        protected function serializeDate(DateTimeInterface $date)
+        {
+            return $date->format('Y-m-d H:i:s');
+        }
 }

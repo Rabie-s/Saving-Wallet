@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use Inertia\Inertia;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreCategoryRequest;
 
 class CategoryController extends Controller
@@ -15,7 +13,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $authenticatedUser = Auth::user();
+        $authenticatedUser = auth()->user();
         $categories = $authenticatedUser->categories()->get();
         return Inertia::render('User/Category/Index',['categories'=>$categories]);
     }
@@ -25,7 +23,7 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        $authenticatedUser = Auth::user();
+        $authenticatedUser = auth()->user();
         $authenticatedUser->categories()->create($request->validated());
         return redirect()->route('user.category.index')
         ->with('message', ['message' => 'Category added successfully', 'type' => 'success']);
@@ -36,7 +34,7 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        $authenticatedUser = Auth::user();
+        $authenticatedUser = auth()->user();
         $category = $authenticatedUser->categories()->find($id);
         $category->delete();
 

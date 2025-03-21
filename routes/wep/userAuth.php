@@ -11,6 +11,7 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::post('logoutUser', [AuthController::class, 'logoutUser'])->name('user.auth.logoutUser');
+    Route::post('changePassword', [AuthController::class, 'changePassword'])->name('user.auth.changePassword');
 });
 
 

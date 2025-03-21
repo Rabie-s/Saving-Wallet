@@ -1,5 +1,5 @@
 <template>
-  <nav class="flex flex-col justify-center bg-blue-600 px-5 min-h-[46px] relative">
+  <nav class="flex flex-col justify-center bg-blue-600 p-6 relative shadow-lg">
     <!-- Toggle Button for Mobile -->
     <span @click="toggleNav = !toggleNav" class="text-2xl text-white absolute right-5 cursor-pointer lg:hidden">
       {{ toggleNav ? '×' : '☰' }}
@@ -7,9 +7,9 @@
 
     <!-- Navigation Content -->
     <div :class="{ 'hidden lg:flex': !toggleNav, 'flex': toggleNav }"
-      class="flex-col lg:flex-row items-center justify-between w-full lg:w-auto lg:flex">
+      class="flex-col lg:flex-row items-center justify-around w-full lg:w-auto lg:flex">
       <!-- Logo -->
-      <h1 class="font-extrabold text-white text-[20px]">QuickMenu</h1>
+      <h1 class="font-extrabold text-white text-2xl">Saving Wallet</h1>
 
       <!-- Navigation Links -->
       <div class="m-5 lg:m-0">
@@ -36,13 +36,16 @@
           </Link>
 
           <Link :href="route('user.auth.showRegistrationForm')">
-          <Button color="white">Sign Up</Button>
+          <Button color="primary">Sign Up</Button>
           </Link>
         </template>
 
         <template v-if="page.props.auth.user">
           <Button color="white">
             <Link :href="route('user.wallet')">My wallet</Link>
+          </Button>
+          <Button color="white">
+            <Link :href="route('user.profile')">My profile</Link>
           </Button>
           <Button @click="logout" color="white">Logout</Button>
         </template>

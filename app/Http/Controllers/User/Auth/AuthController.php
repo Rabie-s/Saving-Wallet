@@ -7,8 +7,10 @@ use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\LoginUserRequest;
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdatePasswordRequest;
 
 class AuthController extends Controller
 {
@@ -60,6 +62,19 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('home')->with('message', ['message' => 'good bay', 'type' => 'success']);
+    }
+
+    public function changePassword(UpdatePasswordRequest $request)
+    {
+        
+        $checkPassword = Hash::check($request->validated()['currentPassword'], $request->user()->password);
+        
+        if ($checkPassword) {
+            $request->user()->password = $request->newPassword;
+            $request->user()->save();
+            return redirect()->back()->with('message', ['message' => 'Password Change Successful', 'type' => 'success']);
+        }
+        return redirect()->back()->with('message', ['message' => 'Incorrect Password', 'type' => 'error']);
     }
 
 }

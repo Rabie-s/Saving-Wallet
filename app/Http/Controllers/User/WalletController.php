@@ -18,8 +18,8 @@ class WalletController extends Controller
         $userTransactions = $authenticatedUser->transactions()
             ->select('id', 'type', 'amount', 'created_at')->latest()->limit(5)->get();
 
-        $totalIncome = $authenticatedUser->transactions()->where('type', 'income')->sum('amount');
-        $totalExpenses = $authenticatedUser->transactions()->where('type', 'expenses')->sum('amount');
+        $totalIncome = $authenticatedUser->transactions()->where('type', 'income')->sum('amount');//get total income for user
+        $totalExpenses = $authenticatedUser->transactions()->where('type', 'expenses')->sum('amount');//get total expenses for user
 
 
         // Fetch public and user privet categories

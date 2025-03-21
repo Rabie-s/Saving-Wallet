@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use Inertia\Inertia;
-use Illuminate\Http\Request;
+
 use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
@@ -11,7 +11,7 @@ class HomeController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request)
+    public function __invoke()
     {
         return Inertia::render('User/Home/Index');
     }

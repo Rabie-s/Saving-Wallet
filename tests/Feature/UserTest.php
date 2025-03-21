@@ -41,6 +41,7 @@ class UserTest extends TestCase
 
         $this->assertDatabaseHas('users', ['email' => $user->email]);
         $this->assertDatabaseHas('wallets', ['user_id' =>$user->id]);
+        $response->assertRedirect(route('home'));
     }
 
     public function test_user_can_login()
@@ -59,6 +60,7 @@ class UserTest extends TestCase
         ]);
 
         $this->assertAuthenticatedAs($user);
+        $response->assertRedirect();
     }
 
     public function test_user_can_logout()
@@ -73,5 +75,27 @@ class UserTest extends TestCase
         $response->assertRedirect('/');
 
         $this->assertGuest();
+    }
+
+    public function test_user_can_change_password(){
+        $user = User::create([
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+            'phone_number' => '1234567890',
+            'password' => bcrypt('rabiePassword'),
+            'role' => 'user',
+        ]);
+
+        $this->actingAs($user);
+
+        $response = $this->post(route('user.auth.changePassword'), [
+            'currentPassword' => 'rabiePassword',
+            'newPassword' => 'rabieNewPassword',
+        ]);
+
+        $response->assertRedirect()
+        ->assertSessionHas('message', ['message' => 'Password Change Successful', 'type' => 'success']);
+
+
     }
 }
