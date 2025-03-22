@@ -19,22 +19,25 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr v-if="users.data.length === 0">
+                        <td colspan="6" class="px-6 py-4 text-center text-gray-500">No users found.</td>
+                    </tr>
+
                     <tr v-for="(user, index) in users.data" :key="user.id"
                         class="border-b hover:bg-gray-100 transition">
                         <td class="px-6 py-4">{{ index + 1 }}</td>
                         <td class="px-6 py-4">{{ user.name }}</td>
-                        <td class="px-6 py-4">{{ user.total_income }}</td>
-                        <td class="px-6 py-4">{{ user.total_expenses }}</td>
-                        <td class="px-6 py-4">{{ user.wallet.balance }}</td>
-                        <td class="px-6 py-4">{{ user.created_at }}</td>
+                        <td class="px-6 py-4">{{ user.total_income | formatCurrency }}</td>
+                        <td class="px-6 py-4">{{ user.total_expenses | formatCurrency }}</td>
+                        <td class="px-6 py-4">{{ user.wallet.balance | formatCurrency }}</td>
+                        <td class="px-6 py-4">{{ user.created_at | formatDate }}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
         <!-- Pagination Section -->
-        <div v-if="users.links && users.links.length > 1"
-            class="d-flex justify-content-center mt-4">
+        <div v-if="users.links && users.links.length > 1" class="d-flex justify-content-center mt-4">
             <Pagination :links="users.links" />
         </div>
 

@@ -12,7 +12,7 @@
         </div>
 
 
-        <div class="mt-5 grid grid-cols-1 md:grid-cols-2 gap-2 p-2">
+        <div class="mt-5 grid grid-cols-1 md:grid-cols-2 gap-5 p-2">
 
             <div class="col-span-1 md:col-span-2 bg-blue-600 w-full p-6 rounded-lg">
                 <div class="flex items-center justify-center h-full">
@@ -33,37 +33,43 @@
             </div>
 
             <div class="col-span-1 md:col-span-2">
-
-                <h1 class="text-2xl text-center uppercase font-bold my-2">Last 5 transaction</h1>
+                <h1 v-if="userTransactions.length" class="text-2xl text-center uppercase font-bold my-2">Last 5 Transactions</h1>
 
                 <div class="overflow-x-auto bg-white shadow-lg rounded-lg">
-                    <table class="w-full border-collapse">
-                        <thead class="bg-gray-200 text-gray-700 uppercase text-sm">
-                            <tr>
-                                <th class="px-6 py-3 text-left">#</th>
-                                <th class="px-6 py-3 text-left">Amount</th>
-                                <th class="px-6 py-3 text-left">Type</th>
-                                <th class="px-6 py-3 text-left">Transaction date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="(transaction, index) in userTransactions" :key="transaction.id"
-                                class="border-b hover:bg-gray-100 transition">
-                                <td class="px-6 py-4">{{ index + 1 }}</td>
-                                <td class="px-6 py-4">{{ transaction.amount }}</td>
-                                <td class="px-6 py-4">{{ transaction.type }}</td>
-                                <td class="px-6 py-4">{{ transaction.created_at }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                    <template v-if="userTransactions.length">
+                        <table class="w-full border-collapse">
+                            <thead class="bg-gray-200 text-gray-700 uppercase text-sm">
+                                <tr>
+                                    <th class="px-6 py-3 text-left">#</th>
+                                    <th class="px-6 py-3 text-left">Amount</th>
+                                    <th class="px-6 py-3 text-left">Type</th>
+                                    <th class="px-6 py-3 text-left">Transaction date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(transaction, index) in userTransactions" :key="transaction.id"
+                                    class="border-b hover:bg-gray-100 transition">
+                                    <td class="px-6 py-4">{{ index + 1 }}</td>
+                                    <td class="px-6 py-4">{{ transaction.amount }}</td>
+                                    <td class="px-6 py-4">{{ transaction.type }}</td>
+                                    <td class="px-6 py-4">{{ transaction.created_at }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </template>
 
+                    <div v-else class="text-center p-6 text-gray-500">
+                        <p class="text-lg font-semibold">No transactions found.</p>
+                        <p class="text-sm">Start by adding your first transaction.</p>
+                        <Button class="mt-3" @click="open = true" color="primary">Create New Transaction</Button>
+                    </div>
+                </div>
             </div>
 
             <div class="col-span-1">
                 <div class="w-full">
                     <h1 class="text-center">Income VS Expenses</h1>
-                    <BarChart :income="props.totalIncome" :expenses="props.totalExpenses"  />
+                    <BarChart :income="props.totalIncome" :expenses="props.totalExpenses" />
                 </div>
             </div>
 

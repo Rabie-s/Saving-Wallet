@@ -31,9 +31,9 @@ class User extends Authenticatable
         'role',
     ];
 
-    protected $appends = ['avatar_image_url']; 
+    protected $appends = ['avatar_image_url'];
 
-    public function getAvatarImageUrlAttribute() 
+    public function getAvatarImageUrlAttribute()
     {
         return asset('storage/avatars/' . $this->avatar);
     }
@@ -61,11 +61,13 @@ class User extends Authenticatable
         ];
     }
 
-    public function getTotalIncomeAttribute() {
+    public function getTotalIncomeAttribute()
+    {
         return $this->transactions->where('type', 'income')->sum('amount');
     }
-    
-    public function getTotalExpensesAttribute() {
+
+    public function getTotalExpensesAttribute()
+    {
         return $this->transactions->where('type', 'expenses')->sum('amount');
     }
 
@@ -84,9 +86,9 @@ class User extends Authenticatable
         return $this->hasMany(Category::class);
     }
 
-        //format date
-        protected function serializeDate(DateTimeInterface $date)
-        {
-            return $date->format('Y-m-d H:i:s');
-        }
+    //format date
+    protected function serializeDate(DateTimeInterface $date)
+    {
+        return $date->format('Y-m-d H:i:s');
+    }
 }

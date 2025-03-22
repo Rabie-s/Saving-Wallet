@@ -37,7 +37,7 @@
 
                 <div class="mb-2">
                     <label for="block mb-2 text-sm font-medium text-gray-900">Upload your image</label>
-                    <input type="file" @input="formData.avatar = $event.target.files[0]"  class="outline outline-none rounded w-full p-1 file:bg-blue-600 hover:file:bg-blue-500 file:p-2 file:rounded-lg file:text-white file:outline-none file:border-0 file:cursor-pointer">
+                    <input type="file" @input="formData.avatar = $event.target.files[0]" accept="image/jpeg, image/png, image/jpg"  class="outline outline-none rounded w-full p-1 file:bg-blue-600 hover:file:bg-blue-500 file:p-2 file:rounded-lg file:text-white file:outline-none file:border-0 file:cursor-pointer">
                 </div>
 
                 <div class="mb-2 flex flex-col items-center gap-y-1">

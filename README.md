@@ -33,9 +33,9 @@ Built to help you save money, and see all your finances in one place.
 
 ```bash
     git clone https://github.com/Rabie-s/Saving-Wallet.git
+    cd Saving-Wallet
     composer install
     npm install
-    npm run build
     cp .env.example .env
     php artisan key:generate
     php artisan migrate
@@ -45,9 +45,16 @@ Built to help you save money, and see all your finances in one place.
 ```
     
 ## Running Tests
+1. Set Up the Test Database:
+    - Ensure you have a dedicated database for testing, such as saving-wallet-test.
+    - Verify the database configuration in the .env.testing file to ensure it   points to the correct test database.
+
+2. Run the Tests:
 ```bash
     php artisan test
 ```
+#### Troubleshooting:
+If you encounter errors during testing, create a Unit folder inside the tests/Feature directory. 
 ## Admin Panel Access
 ### Admin Credential
 ```bash

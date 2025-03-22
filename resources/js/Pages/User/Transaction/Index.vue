@@ -22,6 +22,11 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr v-if="userTransactions.data.length === 0">
+                        <td colspan="4" class="px-6 py-4 text-center text-gray-500">
+                            No transactions found.
+                        </td>
+                    </tr>
                     <tr v-for="(transaction, index) in userTransactions.data" :key="transaction.id"
                         class="border-b hover:bg-gray-100 transition">
                         <td class="px-6 py-4">{{ index + 1 }}</td>

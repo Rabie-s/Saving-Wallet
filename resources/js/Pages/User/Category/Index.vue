@@ -18,6 +18,11 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr v-if="categories.length === 0">
+                        <td colspan="3" class="px-6 py-4 text-center text-gray-500">
+                            No categories found.
+                        </td>
+                    </tr>
                     <tr v-for="(category, index) in categories" :key="category.id"
                         class="border-b hover:bg-gray-100 transition">
                         <td class="px-6 py-4">{{ index + 1 }}</td>
