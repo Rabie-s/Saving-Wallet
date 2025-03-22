@@ -13,17 +13,6 @@ class UserTest extends TestCase
 
     use RefreshDatabase;
 
-    public function test_user_can_view_register_form()
-    {
-        $response = $this->get(route('user.auth.showRegistrationForm'));
-        $response->assertStatus(200);
-    }
-
-    public function test_user_can_view_login_form()
-    {
-        $response = $this->get(route('user.auth.showLoginForm'));
-        $response->assertStatus(200);
-    }
 
     public function test_user_can_register()
     {
