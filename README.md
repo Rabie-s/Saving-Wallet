@@ -51,6 +51,7 @@ Built to help you save money, and see all your finances in one place.
 
 2. Run the Tests:
 ```bash
+    composer run dev
     php artisan test
 ```
 #### Troubleshooting:
