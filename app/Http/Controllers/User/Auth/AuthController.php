@@ -33,11 +33,7 @@ class AuthController extends Controller
         $avatar = $request->file('avatar')->store('avatars', 'public');
         $avatarImageName = basename($avatar);
         $validatedData['avatar'] = $avatarImageName;//edit validated avatar 
-        $user = User::create($validatedData);
-
-        //create new wallet for user after register
-        $user->wallet()->create();
-
+        User::create($validatedData);
        return redirect()->route('user.auth.showLoginForm');  
     }
 
