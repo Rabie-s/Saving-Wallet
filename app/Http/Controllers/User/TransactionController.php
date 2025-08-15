@@ -6,6 +6,7 @@ namespace App\Http\Controllers\User;
 use Inertia\Inertia;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTransactionRequest;
+use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
 {
@@ -29,16 +30,19 @@ class TransactionController extends Controller
         if ($type === 'expenses' && $wallet->balance < $amount) {
             return redirect()->back()
                 ->with('message', ['message' => 'You don’t have enough money ', 'type' => 'error']);
-                abort(403);
+            abort(403);
         }
 
-        if ($type === 'income') {
-            $wallet->increment('balance',$amount);
-        } elseif ($type === 'expenses') {
-           $wallet->decrement('balance',$amount);
-        }
-        $authenticatedUser->transactions()->create($request->validated());
-        $wallet->save();//create new transaction
+        DB::transaction(function () use ($wallet, $amount, $type, $authenticatedUser, $request) {
+
+            if ($type === 'income') {
+                $wallet->increment('balance', $amount);
+            } elseif ($type === 'expenses') {
+                $wallet->decrement('balance', $amount);
+            }
+            $authenticatedUser->transactions()->create($request->validated());
+            $wallet->save();//create new transaction
+        });
         return redirect()->route('user.wallet')
             ->with('message', ['message' => 'Transaction make successfully', 'type' => 'success']);
     }
